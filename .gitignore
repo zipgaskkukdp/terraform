@@ -5,3 +5,4 @@
 *.tfvars
 terraform.exe
 terraform.tfvars
+.env
