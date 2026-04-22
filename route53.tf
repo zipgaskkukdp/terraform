@@ -34,4 +34,8 @@ resource "aws_route53_record" "root_domain" {
 output "route53_name_servers" {
   description = "가비아 홈페이지에 등록해야 할 네임서버 주소 4개입니다."
   value       = aws_route53_zone.main.name_servers
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 373dabd4688e14622ea782970521a54f4d6ee3ed

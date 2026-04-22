@@ -55,4 +55,8 @@ resource "aws_subnet" "dummy_pri" {
   cidr_block        = "10.0.50.0/24"
   availability_zone = "ap-northeast-2c"
   tags              = { Name = "DUMMY-PRI-2C" }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 373dabd4688e14622ea782970521a54f4d6ee3ed

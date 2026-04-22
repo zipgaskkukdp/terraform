@@ -133,7 +133,16 @@ resource "aws_security_group" "alb_sg" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+<<<<<<< HEAD
 
+=======
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+>>>>>>> 373dabd4688e14622ea782970521a54f4d6ee3ed
   egress {
     from_port   = 0
     to_port     = 0
@@ -141,4 +150,8 @@ resource "aws_security_group" "alb_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = { Name = "LSO-ALB-SG" }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 373dabd4688e14622ea782970521a54f4d6ee3ed

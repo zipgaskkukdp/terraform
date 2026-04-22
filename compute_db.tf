@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # resource "aws_instance" "web_server" {
 #   ami                    = "ami-0ecfdfd1c8ae01aec"
 #   instance_type          = "t3.micro"
@@ -65,6 +66,8 @@
 # }
 
 
+=======
+>>>>>>> 373dabd4688e14622ea782970521a54f4d6ee3ed
 # 1. Web 서버용 시작 템플릿 (Launch Template)
 resource "aws_launch_template" "web_lt" {
   name_prefix   = "lso-web-lt-"
@@ -142,6 +145,7 @@ resource "aws_lb_target_group" "web_tg" {
   vpc_id   = aws_vpc.lso_vpc.id
 }
 
+<<<<<<< HEAD
 resource "aws_lb_listener" "web_listener" {
   load_balancer_arn = aws_lb.web_alb.arn
   port              = "80"
@@ -152,6 +156,8 @@ resource "aws_lb_listener" "web_listener" {
   }
 }
 
+=======
+>>>>>>> 373dabd4688e14622ea782970521a54f4d6ee3ed
 # 3. Auto Scaling Group (ASG) 구성
 resource "aws_autoscaling_group" "web_asg" {
   name                = "lso-web-asg"
@@ -234,6 +240,10 @@ resource "aws_instance" "app_server" {
   sudo dnf -y install python3-pip mariadb105 gcc python3-devel git
   pip3 install flask pymysql boto3 flask-cors python-dotenv gunicorn
   
+<<<<<<< HEAD
+=======
+
+>>>>>>> 373dabd4688e14622ea782970521a54f4d6ee3ed
   mkdir -p /home/ec2-user/app
   sudo chown -R ec2-user:ec2-user /home/ec2-user/app
   cd /home/ec2-user/app
@@ -259,6 +269,10 @@ resource "aws_instance" "app_server" {
   tags = { Name = "LSO-PRI-APP-2A" }
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 373dabd4688e14622ea782970521a54f4d6ee3ed
 resource "aws_db_subnet_group" "rds_sub" {
   name       = "lso-rds-sg"
   subnet_ids = [aws_subnet.db_pri.id, aws_subnet.dummy_pri.id]
@@ -341,4 +355,44 @@ resource "aws_s3_bucket_policy" "storage_policy" {
       }
     ]
   })
+<<<<<<< HEAD
+=======
+}
+
+# 1. 기존 ACM 인증서 불러오기 (ACM에 이미 있는 인증서 사용)
+data "aws_acm_certificate" "existing_cert" {
+  domain   = var.domain_name
+  statuses = ["ISSUED"]
+}
+
+# 2. HTTPS 리스너 추가 (인증서 연결)
+resource "aws_lb_listener" "https_listener" {
+  load_balancer_arn = aws_lb.web_alb.arn # 본인의 ALB 리소스명 확인
+  port              = "443"
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  certificate_arn   = data.aws_acm_certificate.existing_cert.arn
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.web_tg.arn # 본인의 타겟그룹 리소스명 확인
+  }
+}
+
+# 3. 기존 80포트 리스너 수정 (HTTP -> HTTPS 자동 리다이렉트)
+# 만약 기존에 aws_lb_listener "web_listener"가 있다면 아래 내용으로 교체하세요.
+resource "aws_lb_listener" "web_listener" {
+  load_balancer_arn = aws_lb.web_alb.arn
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action {
+    type = "redirect"
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
+  }
+>>>>>>> 373dabd4688e14622ea782970521a54f4d6ee3ed
 }

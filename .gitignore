@@ -4,4 +4,9 @@
 .terraform.lock.hcl
 *.tfvars
 terraform.exe
+<<<<<<< HEAD
 terraform.tfvars
+=======
+terraform.tfvars
+.env
+>>>>>>> 373dabd4688e14622ea782970521a54f4d6ee3ed
