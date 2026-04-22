@@ -157,6 +157,7 @@ resource "aws_instance" "app_server" {
   sudo dnf -y install python3-pip mariadb105 gcc python3-devel git
   pip3 install flask pymysql boto3 flask-cors python-dotenv gunicorn
   
+
   mkdir -p /home/ec2-user/app
   sudo chown -R ec2-user:ec2-user /home/ec2-user/app
   cd /home/ec2-user/app
@@ -181,6 +182,7 @@ resource "aws_instance" "app_server" {
 
   tags = { Name = "LSO-PRI-APP-2A" }
 }
+
 
 resource "aws_db_subnet_group" "rds_sub" {
   name       = "lso-rds-sg"
