@@ -33,8 +33,4 @@ variable "aws_secret_key" {
 variable "domain_name" {
   description = "가비아에서 구매한 도메인 이름"
   type        = string
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 373dabd4688e14622ea782970521a54f4d6ee3ed

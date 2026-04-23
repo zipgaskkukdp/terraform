@@ -21,6 +21,7 @@ resource "aws_nat_gateway" "lso_nat" {
   tags          = { Name = "LSO-NGW-2A" }
 }
 
+# --- WEB Public Subnets (2A, 2C) ---
 resource "aws_subnet" "web_pub" {
   vpc_id            = aws_vpc.lso_vpc.id
   cidr_block        = "10.0.10.0/24"
@@ -28,7 +29,6 @@ resource "aws_subnet" "web_pub" {
   tags              = { Name = "LSO-WEB-PUB-2A" }
 }
 
-# network.tf 하단에 추가 ALB를 위한 가용영역 추가
 resource "aws_subnet" "web_pub_2c" {
   vpc_id            = aws_vpc.lso_vpc.id
   cidr_block        = "10.0.20.0/24"
@@ -36,6 +36,7 @@ resource "aws_subnet" "web_pub_2c" {
   tags              = { Name = "LSO-WEB-PUB-2C" }
 }
 
+# --- APP Private Subnets (2A, 2C) ---
 resource "aws_subnet" "app_pri" {
   vpc_id            = aws_vpc.lso_vpc.id
   cidr_block        = "10.0.11.0/24"
@@ -43,6 +44,14 @@ resource "aws_subnet" "app_pri" {
   tags              = { Name = "LSO-APP-PRI-2A" }
 }
 
+resource "aws_subnet" "app_pri_2c" {
+  vpc_id            = aws_vpc.lso_vpc.id
+  cidr_block        = "10.0.21.0/24"
+  availability_zone = "ap-northeast-2c"
+  tags              = { Name = "LSO-APP-PRI-2C" }
+}
+
+# --- DB Private Subnets (2A, 2C) ---
 resource "aws_subnet" "db_pri" {
   vpc_id            = aws_vpc.lso_vpc.id
   cidr_block        = "10.0.12.0/24"
@@ -50,13 +59,9 @@ resource "aws_subnet" "db_pri" {
   tags              = { Name = "LSO-DB-PRI-2A" }
 }
 
-resource "aws_subnet" "dummy_pri" {
+resource "aws_subnet" "db_pri_2c" {
   vpc_id            = aws_vpc.lso_vpc.id
-  cidr_block        = "10.0.50.0/24"
+  cidr_block        = "10.0.22.0/24"
   availability_zone = "ap-northeast-2c"
-  tags              = { Name = "DUMMY-PRI-2C" }
-<<<<<<< HEAD
+  tags              = { Name = "LSO-DB-PRI-2C" }
 }
-=======
-}
->>>>>>> 373dabd4688e14622ea782970521a54f4d6ee3ed

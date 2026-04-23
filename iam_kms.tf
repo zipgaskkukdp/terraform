@@ -39,8 +39,4 @@ resource "aws_kms_key" "rds_key" {
   })
 }
 
-<<<<<<< HEAD
 data "aws_caller_identity" "current" {}
-=======
-data "aws_caller_identity" "current" {}
->>>>>>> 373dabd4688e14622ea782970521a54f4d6ee3ed
